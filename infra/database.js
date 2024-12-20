@@ -1,3 +1,4 @@
+import { EXPORT_DETAIL } from "next/dist/shared/lib/constants";
 import { Client } from "pg";
 
 async function query(queryObject) {
@@ -7,6 +8,7 @@ async function query(queryObject) {
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
+    ssl: process.env.NODE_ENV === "development" ? false : true,
   });
   console.log("Credenciais do Postgres:", {
     host: process.env.POSTGRES_HOST,
@@ -23,6 +25,7 @@ async function query(queryObject) {
   } catch (error) {
     console.error(error);
     throw error;
+    EXPORT_DETAIL;
   } finally {
     await client.end();
   }
