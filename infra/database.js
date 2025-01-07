@@ -1,4 +1,3 @@
-import { EXPORT_DETAIL } from "next/dist/shared/lib/constants";
 import { Client } from "pg";
 
 async function query(queryObject) {
@@ -10,7 +9,6 @@ async function query(queryObject) {
   } catch (error) {
     console.error(error);
     throw error;
-    EXPORT_DETAIL;
   } finally {
     await client.end();
   }
@@ -30,10 +28,12 @@ async function getNewClient() {
   return client;
 }
 
-export default {
+const database = {
   query,
   getNewClient,
 };
+
+export default database;
 
 function getSSLValues() {
   if (process.env.POSTGRES_CA) {
